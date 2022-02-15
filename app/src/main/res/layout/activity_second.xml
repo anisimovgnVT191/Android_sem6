@@ -4,15 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".SecondActivity">
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/go_to_next"
+        android:id="@+id/open_web"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/main_activity_button"
-        android:layout_marginEnd="@dimen/buttons_margin"
+        android:text="@string/second_activity_button"
         android:layout_marginStart="@dimen/buttons_margin"
+        android:layout_marginEnd="@dimen/buttons_margin"
         android:textAllCaps="false"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>

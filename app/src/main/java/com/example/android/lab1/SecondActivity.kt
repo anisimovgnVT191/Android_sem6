@@ -1,22 +1,24 @@
 package com.example.android.lab1
 
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import com.example.android.lab1.databinding.ActivityMainBinding
+import com.example.android.lab1.databinding.ActivitySecondBinding
 
-class MainActivity : AppCompatActivity() {
-    private var _binding: ActivityMainBinding? = null
-    private val binding: ActivityMainBinding
+class SecondActivity : AppCompatActivity() {
+    private var _binding: ActivitySecondBinding? = null
+    private val binding: ActivitySecondBinding
         get() = _binding!!
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        _binding = ActivityMainBinding.inflate(layoutInflater)
+        _binding = ActivitySecondBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.goToNext.setOnClickListener {
-            val intent = Intent(this, SecondActivity::class.java)
+        binding.openWeb.setOnClickListener {
+        val url = resources.getString(R.string.google_web_page)
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
             startActivity(intent)
         }
     }
@@ -50,6 +52,6 @@ class MainActivity : AppCompatActivity() {
         _binding = null
     }
     companion object{
-        private const val LOG_TAG = "MainActivity"
+        private const val LOG_TAG = "SECOND_ACTIVITY"
     }
 }
