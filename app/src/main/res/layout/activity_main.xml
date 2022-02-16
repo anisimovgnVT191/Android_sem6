@@ -10,11 +10,24 @@
         android:id="@+id/go_to_next"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/main_activity_button"
+        android:text="@string/navigation_button"
         android:layout_marginEnd="@dimen/buttons_margin"
         android:layout_marginStart="@dimen/buttons_margin"
         android:textAllCaps="false"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/open_web"
+        app:layout_constraintVertical_chainStyle="packed"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/open_web"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/open_web_button"
+        android:layout_marginStart="@dimen/buttons_margin"
+        android:layout_marginEnd="@dimen/buttons_margin"
+        android:textAllCaps="false"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintTop_toBottomOf="@id/go_to_next"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

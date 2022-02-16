@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">lab1</string>
-    <string name="main_activity_button">Go to second activity</string>
-    <string name="second_activity_button">Open google.com in browser</string>
+    <string name="navigation_button">Go to second activity</string>
+    <string name="open_web_button">Open google.com in browser</string>
     <string name="google_web_page">http://google.com</string>
+    <string name="detail_activity_text">Detail Activity</string>
 </resources>

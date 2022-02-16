@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Lab1">
         <activity
-            android:name=".SecondActivity"
+            android:name=".DetailActivity"
             android:exported="true" />
         <activity
             android:name=".MainActivity"
