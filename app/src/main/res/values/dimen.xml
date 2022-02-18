@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <item name="toolbar_title_text_size" type="dimen">24sp</item>
+    <item name="fragment_name_text_size" type="dimen">22sp</item>
+    <item name="fragment_name_padding" type="dimen">8dp</item>
+    <item name="post_card_corner_radius" type="dimen">15dp</item>
+    <item name="post_card_elevation" type="dimen">6dp</item>
+    <item name="post_text_size" type="dimen">16sp</item>
+    <item name="post_textview_padding" type="dimen">8dp</item>
+    <item name="tablayout_text_size" type="dimen">14sp</item>
 </resources>

@@ -8,4 +8,6 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="dark_yellow">#E7BB09</color>
+    <color name="gradient_start">#727273</color>
+    <color name="gradient_end">#00000000</color>
 </resources>

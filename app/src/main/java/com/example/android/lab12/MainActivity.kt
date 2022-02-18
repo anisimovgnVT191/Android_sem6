@@ -19,6 +19,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         setSpannableTitleColor()
         setListeners()
+        setViewPagerFragment()
     }
     private fun setSpannableTitleColor(){
         val title = binding.appBar.title.toString()
@@ -32,6 +33,11 @@ class MainActivity : AppCompatActivity() {
         binding.appBar.title = titleSpannable
 
 
+    }
+    private fun setViewPagerFragment(){
+        supportFragmentManager.beginTransaction()
+            .replace(binding.viewpagerContainer.id, ViewPagerFragment())
+            .commit()
     }
     private fun setListeners(){
         binding.appBar.setNavigationOnClickListener{
