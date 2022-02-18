@@ -28,9 +28,9 @@ class ViewPagerItemFragment : Fragment() {
     ): View {
         _binding = FragmentViewPagerItemBinding.inflate(layoutInflater)
         binding.postsRecycler.apply {
-            layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL).apply {
-                gapStrategy = StaggeredGridLayoutManager.GAP_HANDLING_MOVE_ITEMS_BETWEEN_SPANS
-            }
+            layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)//.apply {
+//                gapStrategy = StaggeredGridLayoutManager.GAP_HANDLING_MOVE_ITEMS_BETWEEN_SPANS
+//            }
             adapter = ConcatAdapter(HeaderAdapter(fragmentName?:""), PostsAdapter(sampleData))
         }
         return binding.root
