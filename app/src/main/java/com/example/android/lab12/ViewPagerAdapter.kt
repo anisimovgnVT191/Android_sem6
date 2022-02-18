@@ -6,10 +6,12 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 class ViewPagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
     override fun getItemCount() = ITEM_COUNT
 
-    override fun createFragment(position: Int) = ViewPagerItemFragment.newInstance("Item $position")
+    override fun createFragment(position: Int):Fragment {
+        return ViewPagerItemFragment.newInstance("Item $position")
+    }
 
     companion object{
-        private var ITEM_COUNT: Int = 10
+        private const val ITEM_COUNT: Int = 10
     }
 
 }

@@ -5,6 +5,7 @@
     android:id="@+id/post_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="4dp"
     app:cardCornerRadius="@dimen/post_card_corner_radius"
     app:cardElevation="@dimen/post_card_elevation">
 
@@ -15,7 +16,9 @@
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/post_image"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"/>
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/post_description"

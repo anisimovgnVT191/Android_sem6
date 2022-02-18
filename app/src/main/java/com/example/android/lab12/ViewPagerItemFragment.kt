@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.android.lab12.databinding.FragmentViewPagerBinding
 import com.example.android.lab12.databinding.FragmentViewPagerItemBinding
 
@@ -27,6 +28,12 @@ class ViewPagerItemFragment : Fragment() {
     ): View {
         _binding = FragmentViewPagerItemBinding.inflate(layoutInflater)
         binding.name.text = fragmentName
+        binding.postsRecycler.apply {
+            layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL).apply {
+                gapStrategy = StaggeredGridLayoutManager.GAP_HANDLING_MOVE_ITEMS_BETWEEN_SPANS
+            }
+            adapter = PostsAdapter(sampleData)
+        }
         return binding.root
     }
 
