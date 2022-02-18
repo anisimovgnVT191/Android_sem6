@@ -83,7 +83,7 @@ class PostsAdapter(
     override fun getItemCount() = sampleData.size
 
     override fun getItemViewType(position: Int) =  when(position % 3){
-        2 -> TYPE_FULL
+        0 -> TYPE_FULL
         else -> TYPE_HALF
     }
 

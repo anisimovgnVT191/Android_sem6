@@ -45,6 +45,10 @@ val sampleData = listOf(
         imageUrl = "https://s74794.cdn.ngenix.net/m/fbb5/dfea/2396/495f/a69a/b2bd/225f/249d/1200_1200_max.jpeg",
         description = "«Родные живут без ночи. Звоню им то ночью, то утром, то вечером». Откровенная Трусова после получения серебра"
     ),
+    Post(
+        imageUrl = "https://s74794.cdn.ngenix.net/m/7c53/d315/1750/4aee/b9b7/f625/26c2/2db0/1200_1200_max.jpeg",
+        description = "«Вы все знали». Фраза Трусовой, брошенная Тутберидзе, станет легендарной, а сама Саша снова может уйти"
+    ),
 )
 data class Post(
     val imageUrl: String,
