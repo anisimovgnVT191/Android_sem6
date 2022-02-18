@@ -3,7 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/tewat/AndroidStudioProjects/lab12/app/src/main/res/drawable/color_selector.xml" value="0.1175925925925926" />
         <entry key="..\:/Users/tewat/AndroidStudioProjects/lab12/app/src/main/res/drawable/rounded_corners_shape.xml" value="0.1" />
+        <entry key="..\:/Users/tewat/AndroidStudioProjects/lab12/app/src/main/res/drawable/tab_icon_color_selecto.xml" value="0.1" />
         <entry key="..\:/Users/tewat/AndroidStudioProjects/lab12/app/src/main/res/drawable/textview_gradient.xml" value="0.1" />
         <entry key="..\:/Users/tewat/AndroidStudioProjects/lab12/app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="..\:/Users/tewat/AndroidStudioProjects/lab12/app/src/main/res/layout/fragment_view_pager.xml" value="0.16" />

@@ -18,6 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         app:tabSelectedTextColor="@color/black"
+        app:tabIconTint="@drawable/color_selector"
         app:tabMode="scrollable"
         app:tabTextAppearance="@style/TabLayoutTextAppereance"
         app:layout_constraintBottom_toBottomOf="parent"/>
