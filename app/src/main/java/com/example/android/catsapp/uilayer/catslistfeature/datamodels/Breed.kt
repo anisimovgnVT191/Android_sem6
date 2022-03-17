@@ -10,7 +10,8 @@ data class Breed(
     val lifeSpan: String,
     val weight: String,
     val country: String,
-    val imageUrl: String
+    val imageUrl: String,
+    val temperament: String,
 ) {
     companion object {
         fun from(breedsItem: BreedsItem) = with(breedsItem) {
@@ -22,7 +23,8 @@ data class Breed(
                 lifeSpan = life_span,
                 weight = weight.metric,
                 country = origin,
-                imageUrl = image?.url.orEmpty()
+                imageUrl = image?.url.orEmpty(),
+                temperament = temperament
             )
         }
     }

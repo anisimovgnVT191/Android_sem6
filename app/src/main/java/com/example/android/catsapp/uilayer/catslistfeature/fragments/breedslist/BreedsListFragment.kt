@@ -8,9 +8,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.HasDefaultViewModelProviderFactory
+import androidx.recyclerview.widget.GridLayoutManager
 import com.example.android.catsapp.R
 import com.example.android.catsapp.databinding.FragmentBreedsListBinding
+import com.example.android.catsapp.uilayer.catslistfeature.delegateadapter.CompositeAdapter
 import com.example.android.catsapp.uilayer.catslistfeature.fragments.breedsdetails.BreedDetailsFragment
+import com.example.android.catsapp.uilayer.catslistfeature.fragments.breedslist.recycler.adapters.BreedAdapter
 import com.example.android.catsapp.uilayer.catslistfeature.viewmodel.BreedsViewModel
 
 class BreedsListFragment : Fragment(),
@@ -20,6 +23,10 @@ class BreedsListFragment : Fragment(),
         get() = _binding!!
 
     private val viewModel: BreedsViewModel by activityViewModels()
+
+    private val compositeAdapter = CompositeAdapter.build {
+        add(BreedAdapter())
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,12 +38,10 @@ class BreedsListFragment : Fragment(),
             viewModel.fetchBreeds()
         }
 
-        binding.button.setOnClickListener {
-            viewModel.fetchBreedImagesByCount(5, "abys")
-            requireActivity().supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, BreedDetailsFragment()).addToBackStack(null)
-                .commit()
-        }
+       binding.breedRecycler.apply {
+           layoutManager = GridLayoutManager(this.context, 2)
+           adapter = compositeAdapter
+       }
 
         return binding.root
     }
@@ -46,7 +51,7 @@ class BreedsListFragment : Fragment(),
 
         viewModel.breedsListUiState.observe(this) { state ->
             if (!state.isErrorOccurred) {
-                Log.e("onViewCreated", state.breedsList.toString())
+                (binding.breedRecycler.adapter as CompositeAdapter).submitList(state.breedsList)
             }
         }
     }

@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.android.catsapp.datalayer.catsbreeedsfeature.CatsRepository
 import com.example.android.catsapp.domainlayer.Either
 import com.example.android.catsapp.uilayer.catslistfeature.datamodels.Breed
+import com.example.android.catsapp.uilayer.catslistfeature.fragments.breedslist.recycler.models.BreedItem
 import com.example.android.catsapp.uilayer.catslistfeature.uistate.BreedDetailsUiState
 import com.example.android.catsapp.uilayer.catslistfeature.uistate.BreedsListUiState
 import kotlinx.coroutines.Job
@@ -32,7 +33,7 @@ class BreedsViewModel(
 
             if (result is Either.Right) {
                 _breedsListState.value = BreedsListUiState(
-                    breedsList = result.right.map { Breed.from(it) }
+                    breedsList = result.right.map { BreedItem(Breed.from(it)) }
                 )
             }
         }

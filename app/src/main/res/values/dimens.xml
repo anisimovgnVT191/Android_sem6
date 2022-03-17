@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="breed_name_text_size">22sp</dimen>
+    <dimen name="breed_temperament_text_size">16sp</dimen>
+    <dimen name="breed_name_padding">8dp</dimen>
+    <dimen name="breed_temperament_padding">8dp</dimen>
+    <dimen name="recycler_card_corner_radius">22dp</dimen>
+    <dimen name="recycler_card_elevation">10dp</dimen>
+</resources>
