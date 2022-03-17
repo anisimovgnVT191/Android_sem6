@@ -1,4 +1,4 @@
-package com.example.android.catsapp.uilayer.catslistfeature.fragments
+package com.example.android.catsapp.uilayer.catslistfeature.fragments.breedslist
 
 import android.os.Bundle
 import android.util.Log
@@ -10,6 +10,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.HasDefaultViewModelProviderFactory
 import com.example.android.catsapp.R
 import com.example.android.catsapp.databinding.FragmentBreedsListBinding
+import com.example.android.catsapp.uilayer.catslistfeature.fragments.breedsdetails.BreedDetailsFragment
 import com.example.android.catsapp.uilayer.catslistfeature.viewmodel.BreedsViewModel
 
 class BreedsListFragment : Fragment(),

@@ -1,4 +1,4 @@
-package com.example.android.catsapp.uilayer.catslistfeature.fragments
+package com.example.android.catsapp.uilayer.catslistfeature.fragments.breedsdetails
 
 import android.os.Bundle
 import android.util.Log
