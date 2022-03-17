@@ -17,7 +17,7 @@ data class BreedsItem(
     val health_issues: Int,
     val hypoallergenic: Int,
     val id: String,
-    val image: Image,
+    val image: Image?,
     val indoor: Int,
     val intelligence: Int,
     val lap: Int,

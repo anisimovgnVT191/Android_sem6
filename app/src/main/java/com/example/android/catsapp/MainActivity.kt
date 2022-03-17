@@ -1,36 +1,48 @@
 package com.example.android.catsapp
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import androidx.lifecycle.lifecycleScope
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.HasDefaultViewModelProviderFactory
+import androidx.lifecycle.ViewModelProvider
+import com.example.android.catsapp.databinding.ActivityMainBinding
 import com.example.android.catsapp.datalayer.catsbreeedsfeature.CatsApi
-import com.example.android.catsapp.datalayer.catsbreeedsfeature.Order
+import com.example.android.catsapp.datalayer.catsbreeedsfeature.CatsRepository
+import com.example.android.catsapp.datalayer.catsbreeedsfeature.CatsRetrofitSource
 import com.example.android.catsapp.datalayer.retrofitbuilder.ServiceBuilder
+import com.example.android.catsapp.uilayer.catslistfeature.viewmodel.BreedsDetailsViewModelFactory
+import com.example.android.catsapp.uilayer.catslistfeature.fragments.BreedsListFragment
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), HasDefaultViewModelProviderFactory {
+    private var _binding: ActivityMainBinding? = null
+    private val binding: ActivityMainBinding
+        get() = _binding!!
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        _binding = ActivityMainBinding.inflate(layoutInflater)
+
+        setContentView(binding.root)
+
+        if (savedInstanceState == null) {
+            supportFragmentManager.beginTransaction()
+                .add(binding.fragmentContainer.id, BreedsListFragment()).commit()
+        }
+    }
+    override fun getDefaultViewModelProviderFactory(): ViewModelProvider.Factory {
+        return BreedsDetailsViewModelFactory(
+            CatsRepository(
+                CatsRetrofitSource(
+                    ServiceBuilder.buildService(
+                        CatsApi::class.java
+                    ), Dispatchers.IO
+                )
+            )
+        )
     }
 
-    override fun onStart() {
-        super.onStart()
-        lifecycleScope.launch {
-            val api = ServiceBuilder.buildService(CatsApi::class.java)
-
-            val response = api.getBreeds()
-
-            if (response.isSuccessful && response.body() != null) {
-                Log.e("onStart", response.body().toString())
-                Log.e("onStart", response.raw().request.url.toString())
-                Log.e("onStart", response.raw().request.headers.toString())
-            } else {
-                Log.e("onStart", "${response.code()} ${response.errorBody().toString()}")
-            }
-        }
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 }
