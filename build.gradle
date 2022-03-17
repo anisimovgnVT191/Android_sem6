@@ -21,6 +21,8 @@ ext {
     lifecycleScopeVersion = '2.4.1'
     liveDataVersion = '2.4.1'
     coroutinesVersion = '1.6.0'
+    loggingInterceptorVersion = '4.2.1'
+    converterGsonVersion = '2.9.0'
 }
 task clean(type: Delete) {
     delete rootProject.buildDir
