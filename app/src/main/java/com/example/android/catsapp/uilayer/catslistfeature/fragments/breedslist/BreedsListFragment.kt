@@ -31,7 +31,7 @@ class BreedsListFragment : Fragment(),
         add(BreedAdapter(listener = { breedId ->
             viewModel.fetchBreedImagesByCount(5, breedId)
             requireActivity().supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, BreedDetailsFragment())
+                .replace(R.id.fragment_container, BreedDetailsFragment.newInstance(breedId))
                 .addToBackStack(null)
                 .commit()
         }))
@@ -55,6 +55,7 @@ class BreedsListFragment : Fragment(),
             viewModel.fetchBreeds()
         }
     }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

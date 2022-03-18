@@ -33,7 +33,7 @@ class BreedsViewModel(
     val breedsListUiState: LiveData<BreedsListUiState>
         get() = _breedsListState
 
-    private val _breedDetailsState = MutableLiveData(BreedDetailsUiState())
+    private val _breedDetailsState = MutableLiveData(BreedDetailsUiState(list = listOf(LoadingItem())))
     val breedDetailsState: LiveData<BreedDetailsUiState>
         get() = _breedDetailsState
 
@@ -66,12 +66,19 @@ class BreedsViewModel(
     fun fetchBreedImagesByCount(count: Int, breedsId: String) {
         fetchBreedImagesByCountJob?.cancel()
 
+        _breedDetailsState.value = breedDetailsState.value!!.copy(
+            list = listOf(LoadingItem())
+        )
         fetchBreedImagesByCountJob = viewModelScope.launch {
             val result = repository.getBreedsImageById(count, breedsId)
 
             if (result is Either.Right) {
                 _breedDetailsState.value = BreedDetailsUiState(
                     list = formDetailsStateList(result.right)
+                )
+            } else {
+                _breedDetailsState.value = BreedDetailsUiState(
+                    list = listOf(ErrorItem(NoInternetConnectionException()))
                 )
             }
         }
@@ -111,8 +118,11 @@ class BreedsViewModel(
             breedDescription = breed.description,
             breedTemperament = breed.temperament
         )
+        val imagesItem = com.example.android.catsapp.uilayer.catslistfeature.fragments.breedsdetails.recycler.models.ImagesItem(
+            imagesUrlList = list.map { it.url }
+        )
 
-        return listOf(descriptionItem) + characteristicsList
+        return listOf(imagesItem, descriptionItem) + characteristicsList
     }
 
     private fun Array<Characteristics>.mapByBreed(breed: com.example.android.catsapp.datalayer.catsbreeedsfeature.datamodels.getimages.Breed) =
