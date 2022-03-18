@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.HasDefaultViewModelProviderFactory
@@ -28,17 +29,29 @@ class BreedsListFragment : Fragment(),
     private val viewModel: BreedsViewModel by activityViewModels()
 
     private val compositeAdapter = CompositeAdapter.build {
+
         add(BreedAdapter(listener = { breedId ->
+
             viewModel.fetchBreedImagesByCount(5, breedId)
+
             requireActivity().supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, BreedDetailsFragment.newInstance(breedId))
                 .addToBackStack(null)
                 .commit()
         }))
 
-        add(HeaderAdapter(textWatcher = { s, start, before, count ->
-            viewModel.search(s.toString())
-        }))
+        add(
+            HeaderAdapter(
+                textWatcher = { s, _, _, _ ->
+                    viewModel.search(s.toString())
+                },
+                filterButtonListener = { view ->
+                    Toast.makeText(view.context, "Filter button pressed", Toast.LENGTH_SHORT).show()
+                },
+                sortButtonListener = { view ->
+                    Toast.makeText(view.context, "Sort button pressed", Toast.LENGTH_SHORT).show()
+                })
+        )
 
         add(ErrorAdapter(reloadButtonListener = {
             viewModel.fetchBreeds()

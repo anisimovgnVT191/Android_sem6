@@ -17,4 +17,5 @@
     <dimen name="image_recycler_item_radius">300dp</dimen>
     <dimen name="image_recycler_item_margin">16dp</dimen>
     <dimen name="cat_circle_image_elevation">20dp</dimen>
+    <dimen name="header_items_margin">8dp</dimen>
 </resources>

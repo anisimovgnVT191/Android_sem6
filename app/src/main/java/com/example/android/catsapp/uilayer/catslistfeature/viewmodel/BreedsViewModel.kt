@@ -38,6 +38,8 @@ class BreedsViewModel(
     val breedDetailsState: LiveData<BreedDetailsUiState>
         get() = _breedDetailsState
 
+    private var searchText: String = ""
+
     private var breedsList: List<BreedsItem>? = null
     private var fetchBreedsJob: Job? = null
     fun fetchBreeds() {
@@ -53,7 +55,7 @@ class BreedsViewModel(
             if (result is Either.Right) {
                 breedsList = result.right
                 _breedsListState.value = BreedsListUiState(
-                    breedsList = listOf(HeaderItem()) + result.right.map { BreedItem(Breed.from(it)) }
+                    breedsList = listOf(HeaderItem(searchText)) + result.right.map { BreedItem(Breed.from(it)) }
                 )
             } else {
                 _breedsListState.value = BreedsListUiState(
@@ -87,6 +89,7 @@ class BreedsViewModel(
 
     private var searchJob: Job? = null
     fun search(breed: String) {
+        searchText = breed
         searchJob?.cancel()
         Log.e("search", breed)
         searchJob = viewModelScope.launch {
@@ -96,12 +99,12 @@ class BreedsViewModel(
 
             if (resultList.isEmpty()) {
                 _breedsListState.value = breedsListUiState.value!!.copy(
-                    breedsList = listOf(HeaderItem(), ErrorItem(SearchReturnedZeroItemsException()))
+                    breedsList = listOf(HeaderItem(searchText), ErrorItem(SearchReturnedZeroItemsException()))
                 )
                 return@launch
             }
             _breedsListState.value = breedsListUiState.value!!.copy(
-                breedsList = listOf(HeaderItem()) + resultList.map { BreedItem(Breed.from(it)) }
+                breedsList = listOf(HeaderItem(searchText)) + resultList.map { BreedItem(Breed.from(it)) }
             )
         }
 
