@@ -17,7 +17,7 @@
             android:id="@+id/cat_image"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:adjustViewBounds="true"/>
+            android:adjustViewBounds="true" />
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
@@ -44,6 +44,7 @@
                 android:padding="8dp"
                 android:textColor="@color/white"
                 android:textSize="@dimen/breed_temperament_text_size"
+                android:textStyle="italic"
                 tools:text="Active, Energetic, Independent, Intelligent, Gentle" />
         </androidx.appcompat.widget.LinearLayoutCompat>
 

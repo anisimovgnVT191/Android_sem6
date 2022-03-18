@@ -15,6 +15,7 @@ import com.example.android.catsapp.uilayer.catslistfeature.datamodels.Breed
 import com.example.android.catsapp.uilayer.catslistfeature.delegateadapter.DelegateAdapterItem
 import com.example.android.catsapp.uilayer.catslistfeature.fragments.breedsdetails.recycler.models.CharacteristicItem
 import com.example.android.catsapp.uilayer.catslistfeature.fragments.breedsdetails.recycler.models.Characteristics
+import com.example.android.catsapp.uilayer.catslistfeature.fragments.breedsdetails.recycler.models.DescriptionItem
 import com.example.android.catsapp.uilayer.catslistfeature.fragments.breedslist.recycler.models.BreedItem
 import com.example.android.catsapp.uilayer.catslistfeature.fragments.breedslist.recycler.models.ErrorItem
 import com.example.android.catsapp.uilayer.catslistfeature.fragments.breedslist.recycler.models.HeaderItem
@@ -104,8 +105,14 @@ class BreedsViewModel(
     private fun formDetailsStateList(list: List<ImagesItem>): List<DelegateAdapterItem> {
         val breed = list.first().breeds.first()
         val characteristicsList = Characteristics.values().mapByBreed(breed)
+        val descriptionItem = DescriptionItem(
+            breedId = breed.id,
+            breedName = breed.name,
+            breedDescription = breed.description,
+            breedTemperament = breed.temperament
+        )
 
-        return characteristicsList
+        return listOf(descriptionItem) + characteristicsList
     }
 
     private fun Array<Characteristics>.mapByBreed(breed: com.example.android.catsapp.datalayer.catsbreeedsfeature.datamodels.getimages.Breed) =

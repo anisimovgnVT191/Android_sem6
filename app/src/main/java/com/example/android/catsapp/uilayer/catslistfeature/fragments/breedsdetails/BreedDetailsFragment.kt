@@ -12,6 +12,7 @@ import com.example.android.catsapp.R
 import com.example.android.catsapp.databinding.FragmentBreedDetailsBinding
 import com.example.android.catsapp.uilayer.catslistfeature.delegateadapter.CompositeAdapter
 import com.example.android.catsapp.uilayer.catslistfeature.fragments.breedsdetails.recycler.adapter.CharacteristicAdapter
+import com.example.android.catsapp.uilayer.catslistfeature.fragments.breedsdetails.recycler.adapter.DescriptionAdapter
 import com.example.android.catsapp.uilayer.catslistfeature.viewmodel.BreedsViewModel
 
 class BreedDetailsFragment : Fragment(R.layout.fragment_breed_details) {
@@ -23,6 +24,7 @@ class BreedDetailsFragment : Fragment(R.layout.fragment_breed_details) {
 
     private val compositeAdapter = CompositeAdapter.build {
         add(CharacteristicAdapter())
+        add(DescriptionAdapter())
     }
 
     override fun onCreateView(

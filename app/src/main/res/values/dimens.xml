@@ -11,4 +11,7 @@
     <dimen name="rate_star_padding">12dp</dimen>
     <dimen name="temperament_name_padding">8dp</dimen>
     <dimen name="temperament_name_text_size">16sp</dimen>
+    <dimen name="breed_title_text_size">22sp</dimen>
+    <dimen name="breed_description_text_size">16sp</dimen>
+    <dimen name="breed_info_padding">8dp</dimen>
 </resources>
