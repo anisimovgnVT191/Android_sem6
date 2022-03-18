@@ -8,9 +8,13 @@ import androidx.lifecycle.viewModelScope
 import com.example.android.catsapp.datalayer.catsbreeedsfeature.CatsRepository
 import com.example.android.catsapp.datalayer.catsbreeedsfeature.datamodels.getbreeds.BreedsItem
 import com.example.android.catsapp.domainlayer.Either
+import com.example.android.catsapp.domainlayer.NoInternetConnectionException
+import com.example.android.catsapp.domainlayer.SearchReturnedZeroItemsException
 import com.example.android.catsapp.uilayer.catslistfeature.datamodels.Breed
 import com.example.android.catsapp.uilayer.catslistfeature.fragments.breedslist.recycler.models.BreedItem
+import com.example.android.catsapp.uilayer.catslistfeature.fragments.breedslist.recycler.models.ErrorItem
 import com.example.android.catsapp.uilayer.catslistfeature.fragments.breedslist.recycler.models.HeaderItem
+import com.example.android.catsapp.uilayer.catslistfeature.fragments.breedslist.recycler.models.LoadingItem
 import com.example.android.catsapp.uilayer.catslistfeature.uistate.BreedDetailsUiState
 import com.example.android.catsapp.uilayer.catslistfeature.uistate.BreedsListUiState
 import kotlinx.coroutines.Job
@@ -20,7 +24,7 @@ class BreedsViewModel(
     private val repository: CatsRepository
 ) : ViewModel() {
     private val _breedsListState =
-        MutableLiveData(BreedsListUiState(breedsList = listOf(HeaderItem())))
+        MutableLiveData(BreedsListUiState(breedsList = listOf(LoadingItem())))
     val breedsListUiState: LiveData<BreedsListUiState>
         get() = _breedsListState
 
@@ -33,6 +37,10 @@ class BreedsViewModel(
     fun fetchBreeds() {
         fetchBreedsJob?.cancel()
 
+        _breedsListState.value = breedsListUiState.value!!.copy(
+            breedsList = listOf(LoadingItem())
+        )
+
         fetchBreedsJob = viewModelScope.launch {
             val result = repository.getBreeds()
 
@@ -40,6 +48,10 @@ class BreedsViewModel(
                 breedsList = result.right
                 _breedsListState.value = BreedsListUiState(
                     breedsList = listOf(HeaderItem()) + result.right.map { BreedItem(Breed.from(it)) }
+                )
+            } else {
+                _breedsListState.value = BreedsListUiState(
+                    breedsList = listOf(ErrorItem(NoInternetConnectionException()))
                 )
             }
         }
@@ -69,6 +81,12 @@ class BreedsViewModel(
                 it.name.contains(breed.dropWhitespaces(), true)
             } ?: emptyList()
 
+            if (resultList.isEmpty()) {
+                _breedsListState.value = breedsListUiState.value!!.copy(
+                    breedsList = listOf(HeaderItem(), ErrorItem(SearchReturnedZeroItemsException()))
+                )
+                return@launch
+            }
             _breedsListState.value = breedsListUiState.value!!.copy(
                 breedsList = listOf(HeaderItem()) + resultList.map { BreedItem(Breed.from(it)) }
             )

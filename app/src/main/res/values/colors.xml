@@ -10,4 +10,5 @@
     <color name="gradient_start">#727273</color>
     <color name="gradient_end">#00000000</color>
     <color name="buttons_color">#EA8815</color>
+    <color name="transparent">#00000000</color>
 </resources>

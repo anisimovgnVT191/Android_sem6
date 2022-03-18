@@ -9,9 +9,14 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.HasDefaultViewModelProviderFactory
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.android.catsapp.databinding.FragmentBreedsListBinding
+import com.example.android.catsapp.uilayer.catslistfeature.datamodels.Breed
 import com.example.android.catsapp.uilayer.catslistfeature.delegateadapter.CompositeAdapter
 import com.example.android.catsapp.uilayer.catslistfeature.fragments.breedslist.recycler.adapters.BreedAdapter
+import com.example.android.catsapp.uilayer.catslistfeature.fragments.breedslist.recycler.adapters.ErrorAdapter
 import com.example.android.catsapp.uilayer.catslistfeature.fragments.breedslist.recycler.adapters.HeaderAdapter
+import com.example.android.catsapp.uilayer.catslistfeature.fragments.breedslist.recycler.adapters.LoadingAdapter
+import com.example.android.catsapp.uilayer.catslistfeature.fragments.breedslist.recycler.models.BreedItem
+import com.example.android.catsapp.uilayer.catslistfeature.fragments.breedslist.recycler.models.ErrorItem
 import com.example.android.catsapp.uilayer.catslistfeature.fragments.breedslist.recycler.models.HeaderItem
 import com.example.android.catsapp.uilayer.catslistfeature.viewmodel.BreedsViewModel
 
@@ -25,9 +30,16 @@ class BreedsListFragment : Fragment(),
 
     private val compositeAdapter = CompositeAdapter.build {
         add(BreedAdapter())
-        add(HeaderAdapter(textWatcher = {s, start, before, count ->
+
+        add(HeaderAdapter(textWatcher = { s, start, before, count ->
             viewModel.search(s.toString())
         }))
+
+        add(ErrorAdapter(reloadButtonListener = {
+            viewModel.fetchBreeds()
+        }))
+
+        add(LoadingAdapter())
     }
 
     private val spanCount = 2
@@ -48,8 +60,8 @@ class BreedsListFragment : Fragment(),
                         val item = compositeAdapter.currentList.getOrNull(position)
                             ?: return spanCount / spanCount
                         return when (item) {
-                            is HeaderItem -> spanCount
-                            else -> spanCount / spanCount
+                            is BreedItem -> spanCount / spanCount
+                            else -> spanCount
                         }
                     }
                 }
