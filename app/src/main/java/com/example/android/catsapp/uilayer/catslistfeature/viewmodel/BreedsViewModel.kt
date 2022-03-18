@@ -7,10 +7,14 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.android.catsapp.datalayer.catsbreeedsfeature.CatsRepository
 import com.example.android.catsapp.datalayer.catsbreeedsfeature.datamodels.getbreeds.BreedsItem
+import com.example.android.catsapp.datalayer.catsbreeedsfeature.datamodels.getimages.ImagesItem
 import com.example.android.catsapp.domainlayer.Either
 import com.example.android.catsapp.domainlayer.NoInternetConnectionException
 import com.example.android.catsapp.domainlayer.SearchReturnedZeroItemsException
 import com.example.android.catsapp.uilayer.catslistfeature.datamodels.Breed
+import com.example.android.catsapp.uilayer.catslistfeature.delegateadapter.DelegateAdapterItem
+import com.example.android.catsapp.uilayer.catslistfeature.fragments.breedsdetails.recycler.models.CharacteristicItem
+import com.example.android.catsapp.uilayer.catslistfeature.fragments.breedsdetails.recycler.models.Characteristics
 import com.example.android.catsapp.uilayer.catslistfeature.fragments.breedslist.recycler.models.BreedItem
 import com.example.android.catsapp.uilayer.catslistfeature.fragments.breedslist.recycler.models.ErrorItem
 import com.example.android.catsapp.uilayer.catslistfeature.fragments.breedslist.recycler.models.HeaderItem
@@ -66,7 +70,7 @@ class BreedsViewModel(
 
             if (result is Either.Right) {
                 _breedDetailsState.value = BreedDetailsUiState(
-                    list = result.right
+                    list = formDetailsStateList(result.right)
                 )
             }
         }
@@ -96,6 +100,31 @@ class BreedsViewModel(
 
     private fun String.dropWhitespaces(): String =
         this.dropWhile { it.isWhitespace() }.dropLastWhile { it.isWhitespace() }
+
+    private fun formDetailsStateList(list: List<ImagesItem>): List<DelegateAdapterItem> {
+        val breed = list.first().breeds.first()
+        val characteristicsList = Characteristics.values().mapByBreed(breed)
+
+        return characteristicsList
+    }
+
+    private fun Array<Characteristics>.mapByBreed(breed: com.example.android.catsapp.datalayer.catsbreeedsfeature.datamodels.getimages.Breed) =
+        this.map {
+            when(it) {
+                Characteristics.AffectionLevel -> CharacteristicItem(it,breed.affection_level)
+                Characteristics.Adaptability -> CharacteristicItem(it,breed.adaptability)
+                Characteristics.ChildFriendly -> CharacteristicItem(it,breed.child_friendly)
+                Characteristics.DogFriendly -> CharacteristicItem(it,breed.dog_friendly)
+                Characteristics.EnergyLevel -> CharacteristicItem(it,breed.energy_level)
+                Characteristics.Grooming -> CharacteristicItem(it,breed.grooming)
+                Characteristics.HealthIssues -> CharacteristicItem(it,breed.health_issues)
+                Characteristics.Intelligence -> CharacteristicItem(it,breed.intelligence)
+                Characteristics.SheddingLevel -> CharacteristicItem(it,breed.shedding_level)
+                Characteristics.SocialNeeds -> CharacteristicItem(it,breed.social_needs)
+                Characteristics.StrangerFriendly -> CharacteristicItem(it,breed.stranger_friendly)
+                Characteristics.Vocalisation -> CharacteristicItem(it,breed.vocalisation)
+            }
+        }
 
     override fun onCleared() {
         super.onCleared()

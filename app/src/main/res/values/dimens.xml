@@ -8,4 +8,7 @@
     <dimen name="recycler_card_elevation">10dp</dimen>
     <dimen name="buttons_padding">8dp</dimen>
     <dimen name="error_text_size">16sp</dimen>
+    <dimen name="rate_star_padding">12dp</dimen>
+    <dimen name="temperament_name_padding">8dp</dimen>
+    <dimen name="temperament_name_text_size">16sp</dimen>
 </resources>

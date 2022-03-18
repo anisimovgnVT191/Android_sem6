@@ -1,5 +1,6 @@
 package com.example.android.catsapp.uilayer.catslistfeature.fragments.breedslist.recycler.adapters
 
+import android.telephony.TelephonyCallback
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,9 +12,12 @@ import com.example.android.catsapp.R
 import com.example.android.catsapp.uilayer.catslistfeature.delegateadapter.DelegateAdapter
 import com.example.android.catsapp.uilayer.catslistfeature.delegateadapter.DelegateAdapterItem
 import com.example.android.catsapp.uilayer.catslistfeature.fragments.breedslist.recycler.models.BreedItem
+import com.google.android.material.card.MaterialCardView
 import com.google.android.material.textview.MaterialTextView
 
-class BreedAdapter :
+class BreedAdapter(
+    private val listener: (String) -> Unit
+) :
     DelegateAdapter<BreedItem, BreedAdapter.BreedViewHolder>(BreedItem::class.java) {
 
     override fun createViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
@@ -28,7 +32,7 @@ class BreedAdapter :
         viewHolder: BreedViewHolder,
         payloads: List<DelegateAdapterItem.Payloadable>
     ) {
-        viewHolder.bind(model)
+        viewHolder.bind(model, listener)
     }
 
     inner class BreedViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -36,10 +40,14 @@ class BreedAdapter :
         private val breedName = itemView.findViewById<MaterialTextView>(R.id.breed_name)
         private val breedTemperament =
             itemView.findViewById<MaterialTextView>(R.id.breed_temperament)
+        private val breedHolder = itemView.findViewById<MaterialCardView>(R.id.breed_holder)
 
-        fun bind(item: BreedItem) {
+        fun bind(item: BreedItem, listener: (String) -> Unit) {
             breedTemperament.text = item.breed.temperament
             breedName.text = item.breed.name
+            breedHolder.setOnClickListener {
+                listener(item.breed.breedId)
+            }
             loadImage(item.breed.imageUrl)
         }
 
