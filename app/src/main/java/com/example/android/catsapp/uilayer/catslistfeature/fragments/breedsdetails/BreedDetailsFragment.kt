@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.android.catsapp.R
 import com.example.android.catsapp.databinding.FragmentBreedDetailsBinding
@@ -53,6 +54,7 @@ class BreedDetailsFragment : Fragment(R.layout.fragment_breed_details) {
         binding.detailsRecycler.apply {
             layoutManager = LinearLayoutManager(this.context)
             adapter = compositeAdapter
+            addItemDecoration(DividerItemDecoration(this@BreedDetailsFragment.context, LinearLayoutManager.VERTICAL))
         }
 
         return binding.root

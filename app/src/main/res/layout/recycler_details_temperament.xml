@@ -11,6 +11,8 @@
         android:layout_height="wrap_content"
         android:padding="@dimen/temperament_name_padding"
         android:textSize="@dimen/temperament_name_text_size"
+        android:textColor="@color/dark_blue"
+        android:textStyle="bold"
         tools:text="Test"
         app:layout_constraintTop_toTopOf="parent" />
 

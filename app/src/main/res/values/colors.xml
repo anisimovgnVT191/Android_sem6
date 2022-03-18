@@ -11,4 +11,9 @@
     <color name="gradient_end">#00000000</color>
     <color name="buttons_color">#EA8815</color>
     <color name="transparent">#00000000</color>
+    <color name="light_orange">#EF9915</color>
+    <color name="dark_orange">#E65D19</color>
+    <color name="light_blue">#19A2E6</color>
+    <color name="dark_blue">#156BEF</color>
+
 </resources>
