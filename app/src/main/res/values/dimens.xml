@@ -6,4 +6,5 @@
     <dimen name="breed_temperament_padding">8dp</dimen>
     <dimen name="recycler_card_corner_radius">22dp</dimen>
     <dimen name="recycler_card_elevation">10dp</dimen>
+    <dimen name="buttons_padding">8dp</dimen>
 </resources>

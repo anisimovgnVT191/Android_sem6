@@ -9,6 +9,7 @@ import com.example.android.catsapp.datalayer.catsbreeedsfeature.CatsApi
 import com.example.android.catsapp.datalayer.catsbreeedsfeature.CatsRepository
 import com.example.android.catsapp.datalayer.catsbreeedsfeature.CatsRetrofitSource
 import com.example.android.catsapp.datalayer.retrofitbuilder.ServiceBuilder
+import com.example.android.catsapp.uilayer.catslistfeature.datamodels.Breed
 import com.example.android.catsapp.uilayer.catslistfeature.viewmodel.BreedsDetailsViewModelFactory
 import com.example.android.catsapp.uilayer.catslistfeature.fragments.breedslist.BreedsListFragment
 import kotlinx.coroutines.Dispatchers

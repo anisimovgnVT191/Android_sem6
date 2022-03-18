@@ -1,7 +1,6 @@
 package com.example.android.catsapp.uilayer.catslistfeature.fragments.breedslist
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,11 +8,11 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.HasDefaultViewModelProviderFactory
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.android.catsapp.R
 import com.example.android.catsapp.databinding.FragmentBreedsListBinding
 import com.example.android.catsapp.uilayer.catslistfeature.delegateadapter.CompositeAdapter
-import com.example.android.catsapp.uilayer.catslistfeature.fragments.breedsdetails.BreedDetailsFragment
 import com.example.android.catsapp.uilayer.catslistfeature.fragments.breedslist.recycler.adapters.BreedAdapter
+import com.example.android.catsapp.uilayer.catslistfeature.fragments.breedslist.recycler.adapters.HeaderAdapter
+import com.example.android.catsapp.uilayer.catslistfeature.fragments.breedslist.recycler.models.HeaderItem
 import com.example.android.catsapp.uilayer.catslistfeature.viewmodel.BreedsViewModel
 
 class BreedsListFragment : Fragment(),
@@ -26,8 +25,12 @@ class BreedsListFragment : Fragment(),
 
     private val compositeAdapter = CompositeAdapter.build {
         add(BreedAdapter())
+        add(HeaderAdapter(textWatcher = {s, start, before, count ->
+            viewModel.search(s.toString())
+        }))
     }
 
+    private val spanCount = 2
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -38,10 +41,21 @@ class BreedsListFragment : Fragment(),
             viewModel.fetchBreeds()
         }
 
-       binding.breedRecycler.apply {
-           layoutManager = GridLayoutManager(this.context, 2)
-           adapter = compositeAdapter
-       }
+        binding.breedRecycler.apply {
+            layoutManager = GridLayoutManager(this.context, spanCount).apply {
+                spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+                    override fun getSpanSize(position: Int): Int {
+                        val item = compositeAdapter.currentList.getOrNull(position)
+                            ?: return spanCount / spanCount
+                        return when (item) {
+                            is HeaderItem -> spanCount
+                            else -> spanCount / spanCount
+                        }
+                    }
+                }
+            }
+            adapter = compositeAdapter
+        }
 
         return binding.root
     }
