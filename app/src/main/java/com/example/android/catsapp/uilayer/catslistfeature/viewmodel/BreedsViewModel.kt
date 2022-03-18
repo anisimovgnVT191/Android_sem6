@@ -16,6 +16,7 @@ import com.example.android.catsapp.uilayer.catslistfeature.delegateadapter.Deleg
 import com.example.android.catsapp.uilayer.catslistfeature.fragments.breedsdetails.recycler.models.CharacteristicItem
 import com.example.android.catsapp.uilayer.catslistfeature.fragments.breedsdetails.recycler.models.Characteristics
 import com.example.android.catsapp.uilayer.catslistfeature.fragments.breedsdetails.recycler.models.DescriptionItem
+import com.example.android.catsapp.uilayer.catslistfeature.fragments.breedsdetails.recycler.models.WikipediaItem
 import com.example.android.catsapp.uilayer.catslistfeature.fragments.breedslist.recycler.models.BreedItem
 import com.example.android.catsapp.uilayer.catslistfeature.fragments.breedslist.recycler.models.ErrorItem
 import com.example.android.catsapp.uilayer.catslistfeature.fragments.breedslist.recycler.models.HeaderItem
@@ -121,8 +122,9 @@ class BreedsViewModel(
         val imagesItem = com.example.android.catsapp.uilayer.catslistfeature.fragments.breedsdetails.recycler.models.ImagesItem(
             imagesUrlList = list.map { it.url }
         )
+        val wikiItem = WikipediaItem(url = breed.wikipedia_url)
 
-        return listOf(imagesItem, descriptionItem) + characteristicsList
+        return listOf(imagesItem, descriptionItem) + characteristicsList + listOf(wikiItem)
     }
 
     private fun Array<Characteristics>.mapByBreed(breed: com.example.android.catsapp.datalayer.catsbreeedsfeature.datamodels.getimages.Breed) =

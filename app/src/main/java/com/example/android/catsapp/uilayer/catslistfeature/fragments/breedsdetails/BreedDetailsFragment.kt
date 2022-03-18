@@ -15,6 +15,7 @@ import com.example.android.catsapp.uilayer.catslistfeature.delegateadapter.Compo
 import com.example.android.catsapp.uilayer.catslistfeature.fragments.breedsdetails.recycler.adapter.CharacteristicAdapter
 import com.example.android.catsapp.uilayer.catslistfeature.fragments.breedsdetails.recycler.adapter.DescriptionAdapter
 import com.example.android.catsapp.uilayer.catslistfeature.fragments.breedsdetails.recycler.adapter.ImagesAdapter
+import com.example.android.catsapp.uilayer.catslistfeature.fragments.breedsdetails.recycler.adapter.WikipediaAdapter
 import com.example.android.catsapp.uilayer.catslistfeature.fragments.breedslist.recycler.adapters.ErrorAdapter
 import com.example.android.catsapp.uilayer.catslistfeature.fragments.breedslist.recycler.adapters.LoadingAdapter
 import com.example.android.catsapp.uilayer.catslistfeature.viewmodel.BreedsViewModel
@@ -36,6 +37,7 @@ class BreedDetailsFragment : Fragment(R.layout.fragment_breed_details) {
         add(ErrorAdapter(reloadButtonListener = {
             viewModel.fetchBreedImagesByCount(5, breedId)
         }))
+        add(WikipediaAdapter())
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
