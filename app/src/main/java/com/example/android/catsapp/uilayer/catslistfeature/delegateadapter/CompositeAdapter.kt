@@ -21,8 +21,13 @@ class CompositeAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        Log.e("onCreateViewHolder", "VW = $viewType")
-        return delegates[viewType].createViewHolder(parent)
+        val viewHolder = delegates[viewType].createViewHolder(parent)
+        if (viewHolder is ClickableViewHolder) {
+            viewHolder.setListener { position ->
+                currentList[position]
+            }
+        }
+        return viewHolder
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) =

@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/tewat/AndroidStudioProjects/CatsApp/app/src/main/res/drawable/circualr_button_background.xml" value="0.1" />
         <entry key="..\:/Users/tewat/AndroidStudioProjects/CatsApp/app/src/main/res/drawable/gradient_background.xml" value="0.1" />
         <entry key="..\:/Users/tewat/AndroidStudioProjects/CatsApp/app/src/main/res/drawable/ic_baseline_star_24.xml" value="0.25" />
         <entry key="..\:/Users/tewat/AndroidStudioProjects/CatsApp/app/src/main/res/drawable/ic_baseline_star_outline_24.xml" value="0.25" />
@@ -11,12 +12,13 @@
         <entry key="..\:/Users/tewat/AndroidStudioProjects/CatsApp/app/src/main/res/drawable/rounded_corners_shape.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/tewat/AndroidStudioProjects/CatsApp/app/src/main/res/layout/activity_main.xml" value="0.23802083333333332" />
         <entry key="..\:/Users/tewat/AndroidStudioProjects/CatsApp/app/src/main/res/layout/breed_item_layout.xml" value="0.67" />
+        <entry key="..\:/Users/tewat/AndroidStudioProjects/CatsApp/app/src/main/res/layout/circular_button_background.xml" value="0.18888888888888888" />
         <entry key="..\:/Users/tewat/AndroidStudioProjects/CatsApp/app/src/main/res/layout/details_rate_layout.xml" value="0.67" />
         <entry key="..\:/Users/tewat/AndroidStudioProjects/CatsApp/app/src/main/res/layout/fragment_breed_details.xml" value="0.32864583333333336" />
         <entry key="..\:/Users/tewat/AndroidStudioProjects/CatsApp/app/src/main/res/layout/fragment_breeds_list.xml" value="0.32881709223553934" />
         <entry key="..\:/Users/tewat/AndroidStudioProjects/CatsApp/app/src/main/res/layout/images_recycler_item.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/tewat/AndroidStudioProjects/CatsApp/app/src/main/res/layout/recycler_breed_error.xml" value="0.9" />
-        <entry key="..\:/Users/tewat/AndroidStudioProjects/CatsApp/app/src/main/res/layout/recycler_breed_header.xml" value="0.33141542002301494" />
+        <entry key="..\:/Users/tewat/AndroidStudioProjects/CatsApp/app/src/main/res/layout/recycler_breed_header.xml" value="0.67" />
         <entry key="..\:/Users/tewat/AndroidStudioProjects/CatsApp/app/src/main/res/layout/recycler_breed_loading.xml" value="0.24010416666666667" />
         <entry key="..\:/Users/tewat/AndroidStudioProjects/CatsApp/app/src/main/res/layout/recycler_details_description.xml" value="0.4816053511705686" />
         <entry key="..\:/Users/tewat/AndroidStudioProjects/CatsApp/app/src/main/res/layout/recycler_details_images.xml" value="0.25416666666666665" />

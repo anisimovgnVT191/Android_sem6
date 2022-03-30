@@ -30,12 +30,15 @@ class BreedsListFragment : Fragment(),
 
     private val compositeAdapter = CompositeAdapter.build {
 
-        add(BreedAdapter(listener = { breedId ->
+        add(BreedAdapter(listener = { breedItem ->
 
-            viewModel.fetchBreedImagesByCount(5, breedId)
+            viewModel.fetchBreedImagesByCount(5, breedItem.breed.breedId)
 
             requireActivity().supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, BreedDetailsFragment.newInstance(breedId))
+                .replace(
+                    R.id.fragment_container,
+                    BreedDetailsFragment.newInstance(breedItem.breed.breedId)
+                )
                 .addToBackStack(null)
                 .commit()
         }))
