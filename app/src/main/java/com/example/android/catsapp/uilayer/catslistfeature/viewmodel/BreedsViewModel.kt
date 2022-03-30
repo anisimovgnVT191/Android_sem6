@@ -94,7 +94,7 @@ class BreedsViewModel(
         Log.e("search", breed)
         searchJob = viewModelScope.launch {
             val resultList = breedsList?.filter {
-                it.name.contains(breed.dropWhitespaces(), true)
+                it.name.contains(breed.trim(), true)
             } ?: emptyList()
 
             if (resultList.isEmpty()) {
@@ -110,8 +110,15 @@ class BreedsViewModel(
 
     }
 
-    private fun String.dropWhitespaces(): String =
-        this.dropWhile { it.isWhitespace() }.dropLastWhile { it.isWhitespace() }
+    private var removeFromFavoritesJob: Job? = null
+    fun removeFromFavorites(breedsId: String) {
+
+    }
+
+    private var addToFavoritesJob: Job? = null
+    fun addToFavorites(descriptionItem: DescriptionItem) {
+
+    }
 
     private fun formDetailsStateList(list: List<ImagesItem>): List<DelegateAdapterItem> {
         val breed = list.first().breeds.first()

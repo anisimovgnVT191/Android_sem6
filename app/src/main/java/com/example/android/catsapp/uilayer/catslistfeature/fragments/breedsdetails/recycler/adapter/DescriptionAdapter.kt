@@ -5,19 +5,26 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android.catsapp.R
+import com.example.android.catsapp.databinding.RecyclerDetailsDescriptionBinding
+import com.example.android.catsapp.uilayer.catslistfeature.delegateadapter.ClickableViewHolder
 import com.example.android.catsapp.uilayer.catslistfeature.delegateadapter.DelegateAdapter
 import com.example.android.catsapp.uilayer.catslistfeature.delegateadapter.DelegateAdapterItem
 import com.example.android.catsapp.uilayer.catslistfeature.fragments.breedsdetails.recycler.models.DescriptionItem
 import com.google.android.material.textview.MaterialTextView
 
-class DescriptionAdapter :
+class DescriptionAdapter(
+    private val favoriteListener: (DescriptionItem) -> Unit
+) :
     DelegateAdapter<DescriptionItem, DescriptionAdapter.DescriptionViewHolder>(DescriptionItem::class.java) {
 
     override fun createViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.recycler_details_description, parent, false)
+        val binding = RecyclerDetailsDescriptionBinding.inflate(
+            LayoutInflater.from(parent.context),
+            parent,
+            false
+        )
 
-        return DescriptionViewHolder(view)
+        return DescriptionViewHolder(binding, favoriteListener)
     }
 
     override fun bindViewHolder(
@@ -28,16 +35,32 @@ class DescriptionAdapter :
         viewHolder.bind(model)
     }
 
-    inner class DescriptionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val title = itemView.findViewById<MaterialTextView>(R.id.title_breed)
-        private val description = itemView.findViewById<MaterialTextView>(R.id.breed_description)
-        private val temperament =
-            itemView.findViewById<MaterialTextView>(R.id.breed_temperament_description)
+    class DescriptionViewHolder(
+        private val binding: RecyclerDetailsDescriptionBinding,
+        private val favoriteListener: (DescriptionItem) -> Unit
+    ) : RecyclerView.ViewHolder(binding.root), ClickableViewHolder {
 
         fun bind(item: DescriptionItem) {
-            title.text = item.breedName
-            description.text = item.breedDescription
-            temperament.text = item.breedTemperament
+            with (binding) {
+                bindFavorite(item.isFavorite)
+                titleBreed.text = item.breedName
+                breedDescription.text = item.breedDescription
+                breedTemperamentDescription.text = item.breedTemperament
+            }
+        }
+
+        fun bindFavorite(isFavorite: Boolean) {
+            if (isFavorite) {
+                binding.favoriteSwitch.setImageResource(R.drawable.ic_baseline_favorite_24)
+            } else {
+                binding.favoriteSwitch.setImageResource(R.drawable.ic_baseline_favorite_border_24)
+            }
+        }
+
+        override fun setListener(getItemAt: (Int) -> DelegateAdapterItem) {
+            binding.favoriteSwitch.setOnClickListener {
+                favoriteListener(getItemAt(adapterPosition) as DescriptionItem)
+            }
         }
     }
 }

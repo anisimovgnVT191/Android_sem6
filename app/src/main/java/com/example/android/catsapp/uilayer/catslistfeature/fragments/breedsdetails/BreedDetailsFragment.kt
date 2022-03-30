@@ -31,7 +31,16 @@ class BreedDetailsFragment : Fragment(R.layout.fragment_breed_details) {
 
     private val compositeAdapter = CompositeAdapter.build {
         add(CharacteristicAdapter())
-        add(DescriptionAdapter())
+        add(DescriptionAdapter(
+            favoriteListener = { descriptionItem ->
+                if (descriptionItem.isFavorite) {
+                    viewModel.removeFromFavorites(descriptionItem.breedId)
+                } else {
+                    viewModel.addToFavorites(descriptionItem)
+                }
+
+            }
+        ))
         add(ImagesAdapter())
         add(LoadingAdapter())
         add(ErrorAdapter(reloadButtonListener = {

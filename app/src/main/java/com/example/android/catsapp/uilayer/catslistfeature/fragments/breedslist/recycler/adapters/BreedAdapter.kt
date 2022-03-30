@@ -55,6 +55,8 @@ class BreedAdapter(
         }
 
         private fun loadImage(url: String, to: AppCompatImageView) {
+            circularProgress.start()
+
             Glide.with(to.context)
                 .load(url)
                 .placeholder(circularProgress)

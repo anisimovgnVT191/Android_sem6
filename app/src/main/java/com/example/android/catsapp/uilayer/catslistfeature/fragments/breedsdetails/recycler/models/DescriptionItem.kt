@@ -6,7 +6,8 @@ class DescriptionItem(
     val breedId: String,
     val breedName: String,
     val breedDescription: String,
-    val breedTemperament: String
+    val breedTemperament: String,
+    val isFavorite: Boolean = false
 ) : DelegateAdapterItem {
 
     override val id: Any
