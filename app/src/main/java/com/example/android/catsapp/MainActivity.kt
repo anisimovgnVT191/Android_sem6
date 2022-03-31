@@ -9,14 +9,15 @@ import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.HasDefaultViewModelProviderFactory
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupWithNavController
 import com.example.android.catsapp.databinding.ActivityMainBinding
 import com.example.android.catsapp.datalayer.catsbreeedsfeature.CatsApi
 import com.example.android.catsapp.datalayer.catsbreeedsfeature.CatsRepository
 import com.example.android.catsapp.datalayer.catsbreeedsfeature.CatsRetrofitSource
 import com.example.android.catsapp.datalayer.retrofitbuilder.ServiceBuilder
-import com.example.android.catsapp.uilayer.catslistfeature.datamodels.Breed
 import com.example.android.catsapp.uilayer.catslistfeature.viewmodel.BreedsDetailsViewModelFactory
-import com.example.android.catsapp.uilayer.catslistfeature.fragments.breedslist.BreedsListFragment
 import kotlinx.coroutines.Dispatchers
 
 class MainActivity : AppCompatActivity(), HasDefaultViewModelProviderFactory {
@@ -30,11 +31,9 @@ class MainActivity : AppCompatActivity(), HasDefaultViewModelProviderFactory {
 
         setContentView(binding.root)
 
-        if (savedInstanceState == null) {
-            supportFragmentManager.beginTransaction()
-                .add(binding.fragmentContainer.id, BreedsListFragment()).commit()
-        }
+        setUpNavigation()
     }
+
     override fun getDefaultViewModelProviderFactory(): ViewModelProvider.Factory {
         return BreedsDetailsViewModelFactory(
             CatsRepository(
@@ -69,5 +68,22 @@ class MainActivity : AppCompatActivity(), HasDefaultViewModelProviderFactory {
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+    }
+
+    private fun setUpNavigation() {
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        val navController = navHostFragment.navController
+
+        binding.toolbar.setupWithNavController(navController)
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            binding.toolbar.menu.findItem(R.id.favorites).isVisible =
+                destination.id == R.id.breeds_list_fragment
+        }
+
+        binding.toolbar.menu.findItem(R.id.favorites).setOnMenuItemClickListener {
+            navController.navigate(R.id.action_breedsList_to_favoriteBreeds)
+            true
+        }
     }
 }

@@ -8,11 +8,11 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.HasDefaultViewModelProviderFactory
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.android.catsapp.R
 import com.example.android.catsapp.databinding.FragmentBreedsListBinding
 import com.example.android.catsapp.uilayer.catslistfeature.delegateadapter.CompositeAdapter
-import com.example.android.catsapp.uilayer.catslistfeature.fragments.breedsdetails.BreedDetailsFragment
 import com.example.android.catsapp.uilayer.catslistfeature.fragments.breedslist.recycler.adapters.BreedAdapter
 import com.example.android.catsapp.uilayer.catslistfeature.fragments.breedslist.recycler.adapters.ErrorAdapter
 import com.example.android.catsapp.uilayer.catslistfeature.fragments.breedslist.recycler.adapters.HeaderAdapter
@@ -34,13 +34,8 @@ class BreedsListFragment : Fragment(),
 
             viewModel.fetchBreedImagesByCount(5, breedItem.breed.breedId)
 
-            requireActivity().supportFragmentManager.beginTransaction()
-                .replace(
-                    R.id.fragment_container,
-                    BreedDetailsFragment.newInstance(breedItem.breed.breedId)
-                )
-                .addToBackStack(null)
-                .commit()
+            this@BreedsListFragment.findNavController()
+                .navigate(R.id.action_breedsList_to_breedsDetails)
         }))
 
         add(

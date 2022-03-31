@@ -19,4 +19,8 @@
     <string name="stranger_friendly">Stranger Friendly</string>
     <string name="vocalisation">Vocalisation</string>
     <string name="wikipedia">Wikipedia</string>
+    <string name="favorites">Favorites</string>
+    <string name="description">Description</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
