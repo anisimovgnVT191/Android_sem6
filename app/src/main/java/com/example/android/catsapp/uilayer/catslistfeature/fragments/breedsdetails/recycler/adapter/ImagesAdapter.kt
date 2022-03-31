@@ -6,9 +6,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android.catsapp.R
+import com.example.android.catsapp.uilayer.catslistfeature.delegateadapter.CompositeAdapter
 import com.example.android.catsapp.uilayer.catslistfeature.delegateadapter.DelegateAdapter
 import com.example.android.catsapp.uilayer.catslistfeature.delegateadapter.DelegateAdapterItem
 import com.example.android.catsapp.uilayer.catslistfeature.fragments.breedsdetails.recycler.models.ImagesItem
+import com.example.android.catsapp.uilayer.catslistfeature.fragments.breedsdetails.recycler.models.SingleImageItem
 
 class ImagesAdapter :
     DelegateAdapter<ImagesItem, ImagesAdapter.ImagesViewHolder>(ImagesItem::class.java) {
@@ -28,16 +30,20 @@ class ImagesAdapter :
         viewHolder.bind(model)
     }
 
-    inner class ImagesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val imagesRecycler = itemView.findViewById<RecyclerView>(R.id.images_recycler)
+    class ImagesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        private val compositeAdapter = CompositeAdapter.build {
+            add(SingleImageAdapter())
+        }
+
+        init {
+            val imagesRecycler = itemView.findViewById<RecyclerView>(R.id.images_recycler)
+            imagesRecycler.adapter = compositeAdapter
+        }
 
         fun bind(item: ImagesItem) {
-            imagesRecycler.apply {
-                layoutManager = LinearLayoutManager(itemView.context).apply {
-                    orientation = LinearLayoutManager.HORIZONTAL
-                }
-                adapter = SingleImageAdapter(item.imagesUrlList)
-            }
+            compositeAdapter.submitList(
+                item.imagesUrlList.map { SingleImageItem(it) }
+            )
         }
     }
 }
