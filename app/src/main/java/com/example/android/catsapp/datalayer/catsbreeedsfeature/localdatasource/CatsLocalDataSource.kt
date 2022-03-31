@@ -10,4 +10,6 @@ interface CatsLocalDataSource {
     suspend fun getAllBreedsFromDb(): List<FullBreedInfo>
 
     suspend fun isPresent(breedId: String): Boolean
+
+    suspend fun getBreedById(breedId: String): FullBreedInfo
 }

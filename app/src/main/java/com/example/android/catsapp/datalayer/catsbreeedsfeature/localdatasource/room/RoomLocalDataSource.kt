@@ -36,4 +36,8 @@ class RoomLocalDataSource(
         database.breedDao().isPresent(breedId)
     }
 
+    override suspend fun getBreedById(breedId: String): FullBreedInfo = withContext(dispatcher) {
+        database.breedDao().getBreedById(breedId).let { FullBreedInfo.fromBreedEntity(it) }
+    }
+
 }

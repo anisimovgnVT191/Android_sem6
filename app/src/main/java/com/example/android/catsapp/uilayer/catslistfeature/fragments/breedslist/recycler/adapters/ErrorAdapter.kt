@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.android.catsapp.R
 import com.example.android.catsapp.domainlayer.NoInternetConnectionException
 import com.example.android.catsapp.domainlayer.SearchReturnedZeroItemsException
+import com.example.android.catsapp.domainlayer.ZeroFavoriteCatsException
 import com.example.android.catsapp.uilayer.catslistfeature.delegateadapter.DelegateAdapter
 import com.example.android.catsapp.uilayer.catslistfeature.delegateadapter.DelegateAdapterItem
 import com.example.android.catsapp.uilayer.catslistfeature.fragments.breedslist.recycler.models.ErrorItem
@@ -47,6 +48,11 @@ class ErrorAdapter(
                 }
                 is SearchReturnedZeroItemsException -> {
                     errorText.text = itemView.context.getString(R.string.search_exception)
+                    reloadButton.visibility = View.GONE
+                    reloadButton.setOnClickListener(null)
+                }
+                is ZeroFavoriteCatsException -> {
+                    errorText.text = itemView.context.getString(R.string.zero_favorite_cats_exception)
                     reloadButton.visibility = View.GONE
                     reloadButton.setOnClickListener(null)
                 }

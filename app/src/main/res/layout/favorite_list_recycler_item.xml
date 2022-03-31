@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/favorite_holder"
+    android:paddingBottom="@dimen/favorite_item_main_image_margin"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?attr/selectableItemBackground">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/main_image_holder"
+        android:layout_width="@dimen/main_image_holder_size"
+        android:layout_height="@dimen/main_image_holder_size"
+        android:layout_margin="@dimen/favorite_item_main_image_margin"
+        app:cardCornerRadius="@dimen/main_image_holder_corner_radius"
+        app:cardElevation="@dimen/main_image_holder_elevation"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/main_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:src="@mipmap/ic_launcher_round" />
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/breed_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/favorite_item_breed_name_margin"
+        android:textSize="@dimen/favorite_item_cat_name_text_size"
+        android:textStyle="italic|bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/main_image_holder"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="British shorthair" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/favorite_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/favorite_item_favorite_button_margin_end"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/ic_favorite_24_white" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

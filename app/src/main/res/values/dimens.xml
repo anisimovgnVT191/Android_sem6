@@ -19,4 +19,12 @@
     <dimen name="cat_circle_image_elevation">20dp</dimen>
     <dimen name="header_items_margin">8dp</dimen>
     <dimen name="favorite_switch_margin">8dp</dimen>
+    <dimen name="favorite_item_cat_name_text_size">20sp</dimen>
+    <dimen name="favorite_item_main_image_margin">8dp</dimen>
+    <dimen name="favorite_item_favorite_button_margin_end">8dp</dimen>
+    <dimen name="favorite_item_breed_name_margin">8dp</dimen>
+    <dimen name="main_image_holder_size">48dp</dimen>
+    <dimen name="main_image_holder_elevation">10dp</dimen>
+    <dimen name="main_image_holder_corner_radius">10dp</dimen>
+    <dimen name="error_text_padding">16dp</dimen>
 </resources>

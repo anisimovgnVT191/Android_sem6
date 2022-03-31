@@ -21,6 +21,6 @@
     <string name="wikipedia">Wikipedia</string>
     <string name="favorites">Favorites</string>
     <string name="description">Description</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="zero_favorite_cats_exception">You have\'t added any breeds to favorites yet. You can do this by pressing heart
+    button on breed Description screen.</string>
 </resources>

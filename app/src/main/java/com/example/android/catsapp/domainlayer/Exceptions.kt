@@ -5,3 +5,5 @@ sealed class CatsAppExceptions: Exception()
 class NoInternetConnectionException: CatsAppExceptions()
 
 class SearchReturnedZeroItemsException: CatsAppExceptions()
+
+class ZeroFavoriteCatsException: CatsAppExceptions()

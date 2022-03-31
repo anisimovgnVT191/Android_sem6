@@ -11,6 +11,7 @@ import com.example.android.catsapp.datalayer.catsbreeedsfeature.remotedatasource
 import com.example.android.catsapp.domainlayer.Either
 import com.example.android.catsapp.domainlayer.NoInternetConnectionException
 import com.example.android.catsapp.domainlayer.SearchReturnedZeroItemsException
+import com.example.android.catsapp.domainlayer.ZeroFavoriteCatsException
 import com.example.android.catsapp.uilayer.catslistfeature.datamodels.Breed
 import com.example.android.catsapp.uilayer.catslistfeature.delegateadapter.DelegateAdapterItem
 import com.example.android.catsapp.uilayer.catslistfeature.fragments.breedsdetails.recycler.models.*
@@ -18,6 +19,7 @@ import com.example.android.catsapp.uilayer.catslistfeature.fragments.breedslist.
 import com.example.android.catsapp.uilayer.catslistfeature.fragments.breedslist.recycler.models.ErrorItem
 import com.example.android.catsapp.uilayer.catslistfeature.fragments.breedslist.recycler.models.HeaderItem
 import com.example.android.catsapp.uilayer.catslistfeature.fragments.breedslist.recycler.models.LoadingItem
+import com.example.android.catsapp.uilayer.catslistfeature.fragments.favoriteslist.recycler.model.FavoriteBreedItem
 import com.example.android.catsapp.uilayer.catslistfeature.uistate.BreedDetailsUiState
 import com.example.android.catsapp.uilayer.catslistfeature.uistate.BreedsListUiState
 import com.example.android.catsapp.uilayer.catslistfeature.uistate.FavoriteListUiState
@@ -39,7 +41,7 @@ class BreedsViewModel(
         get() = _breedDetailsState
 
     private val _favoriteListState =
-        MutableLiveData(FavoriteListUiState(listFavorites = emptyList()))
+        MutableLiveData(FavoriteListUiState(listFavorites = listOf(LoadingItem())))
     val favoritesListState: LiveData<FavoriteListUiState>
         get() = _favoriteListState
 
@@ -140,7 +142,9 @@ class BreedsViewModel(
             repository.deleteFromFavorites(breedId)
 
             _favoriteListState.value = FavoriteListUiState(
-                listFavorites = favoritesListState.value!!.listFavorites.filter { it.id != breedId }
+                listFavorites = favoritesListState.value!!.listFavorites.filter { it.id != breedId }.let {
+                    if (it.isNotEmpty()) { it } else { listOf(ErrorItem(ZeroFavoriteCatsException()))}
+                }
             )
 
             breedInfo?.let {
@@ -187,7 +191,18 @@ class BreedsViewModel(
 
         fetchFavoritesJob = viewModelScope.launch {
             val favoritesList = repository.getAllFavorites()
-            _favoriteListState.value = FavoriteListUiState(favoritesList)
+            if (favoritesList.isNotEmpty()) {
+                _favoriteListState.value = FavoriteListUiState(favoritesList.map {
+                    FavoriteBreedItem(
+                        it.id,
+                        it.name,
+                        it.mainImageUrl,
+                        isSelected = true
+                    )
+                })
+            } else {
+                _favoriteListState.value = FavoriteListUiState(listOf(ErrorItem(ZeroFavoriteCatsException())))
+            }
         }
     }
 

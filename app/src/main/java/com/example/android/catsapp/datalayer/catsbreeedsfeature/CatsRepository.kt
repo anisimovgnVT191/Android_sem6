@@ -30,6 +30,12 @@ class CatsRepository(
         count: Int = 1,
         breedsId: String
     ): Either<Exception, FullBreedInfo> {
+        val isPresent = localSource.isPresent(breedsId)
+
+        if (isPresent) {
+            val result = localSource.getBreedById(breedsId)
+            return Either.Right(result)
+        }
         val response = try {
             remoteSource.getBreedsImageById(count, breedsId)
         } catch (e: Exception) {
@@ -38,9 +44,8 @@ class CatsRepository(
 
         return if (response.isSuccessful && response.body() != null) {
             val result = response.body()
-            val isPresent = localSource.isPresent(result!!.first().breeds.first().id)
             Log.e("getBreeds", isPresent.toString())
-            Either.Right(FullBreedInfo.fromImageItem(result, isPresent))
+            Either.Right(FullBreedInfo.fromImageItem(result!!, false))
         } else {
             Either.Left(Exception("Error message = ${response.message()}"))
         }

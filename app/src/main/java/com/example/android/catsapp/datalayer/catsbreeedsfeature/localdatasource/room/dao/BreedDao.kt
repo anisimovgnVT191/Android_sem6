@@ -20,4 +20,7 @@ interface BreedDao {
 
     @Query("SELECT EXISTS(SELECT * FROM Breed WHERE breedId = :breedId)")
     fun isPresent(breedId: String): Boolean
+
+    @Query("SELECT * FROM Breed WHERE breedId = :breedId")
+    fun getBreedById(breedId: String): BreedEntity
 }
