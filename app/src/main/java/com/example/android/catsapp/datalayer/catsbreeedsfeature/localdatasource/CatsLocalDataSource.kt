@@ -5,7 +5,9 @@ import com.example.android.catsapp.datalayer.catsbreeedsfeature.localdatasource.
 interface CatsLocalDataSource {
     suspend fun addBreedToDb(breedDetails: FullBreedInfo)
 
-    suspend fun removeBreedFromDb(breedDetails: FullBreedInfo)
+    suspend fun removeBreedFromDb(breedId: String)
 
     suspend fun getAllBreedsFromDb(): List<FullBreedInfo>
+
+    suspend fun isPresent(breedId: String): Boolean
 }

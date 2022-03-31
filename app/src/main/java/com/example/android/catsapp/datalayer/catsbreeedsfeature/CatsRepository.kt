@@ -1,10 +1,10 @@
 package com.example.android.catsapp.datalayer.catsbreeedsfeature
 
+import android.util.Log
 import com.example.android.catsapp.datalayer.catsbreeedsfeature.localdatasource.CatsLocalDataSource
 import com.example.android.catsapp.datalayer.catsbreeedsfeature.localdatasource.datamodels.FullBreedInfo
 import com.example.android.catsapp.datalayer.catsbreeedsfeature.remotedatasource.CatsRemoteDataSource
 import com.example.android.catsapp.datalayer.catsbreeedsfeature.remotedatasource.datamodels.getbreeds.Breeds
-import com.example.android.catsapp.datalayer.catsbreeedsfeature.remotedatasource.datamodels.getimages.Images
 import com.example.android.catsapp.domainlayer.Either
 
 class CatsRepository(
@@ -29,7 +29,7 @@ class CatsRepository(
     suspend fun getBreedsImageById(
         count: Int = 1,
         breedsId: String
-    ): Either<Exception, Images> {
+    ): Either<Exception, FullBreedInfo> {
         val response = try {
             remoteSource.getBreedsImageById(count, breedsId)
         } catch (e: Exception) {
@@ -37,7 +37,10 @@ class CatsRepository(
         }
 
         return if (response.isSuccessful && response.body() != null) {
-            Either.Right(response.body()!!)
+            val result = response.body()
+            val isPresent = localSource.isPresent(result!!.first().breeds.first().id)
+            Log.e("getBreeds", isPresent.toString())
+            Either.Right(FullBreedInfo.fromImageItem(result, isPresent))
         } else {
             Either.Left(Exception("Error message = ${response.message()}"))
         }
@@ -49,7 +52,7 @@ class CatsRepository(
         localSource.addBreedToDb(breed)
     }
 
-    suspend fun deleteFromFavorites(breed: FullBreedInfo) {
-        localSource.removeBreedFromDb(breed)
+    suspend fun deleteFromFavorites(breedId: String) {
+        localSource.removeBreedFromDb(breedId)
     }
 }

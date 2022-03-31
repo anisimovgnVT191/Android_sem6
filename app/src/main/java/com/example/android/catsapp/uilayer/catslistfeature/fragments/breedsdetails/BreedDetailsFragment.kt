@@ -36,7 +36,7 @@ class BreedDetailsFragment : Fragment(R.layout.fragment_breed_details) {
                 if (descriptionItem.isFavorite) {
                     viewModel.removeFromFavorites(descriptionItem.breedId)
                 } else {
-                    viewModel.addToFavorites(descriptionItem)
+                    viewModel.addToFavorites(descriptionItem.breedId)
                 }
 
             }

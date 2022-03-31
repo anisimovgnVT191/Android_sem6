@@ -32,7 +32,14 @@ class DescriptionAdapter(
         viewHolder: DescriptionViewHolder,
         payloads: List<DelegateAdapterItem.Payloadable>
     ) {
-        viewHolder.bind(model)
+        when (val payload = payloads.getOrNull(0) as? DescriptionItem.ChangePayload) {
+            is DescriptionItem.ChangePayload.FavoriteChanged -> {
+                viewHolder.bindFavorite(payload.isFavorite)
+            }
+            else -> {
+                viewHolder.bind(model)
+            }
+        }
     }
 
     class DescriptionViewHolder(

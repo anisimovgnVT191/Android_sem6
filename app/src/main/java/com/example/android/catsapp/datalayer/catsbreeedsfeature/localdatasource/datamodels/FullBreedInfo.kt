@@ -3,6 +3,8 @@ package com.example.android.catsapp.datalayer.catsbreeedsfeature.localdatasource
 import com.example.android.catsapp.datalayer.catsbreeedsfeature.localdatasource.room.entities.BreedEntity
 import com.example.android.catsapp.datalayer.catsbreeedsfeature.localdatasource.room.entities.CharacteristicsEntity
 import com.example.android.catsapp.datalayer.catsbreeedsfeature.localdatasource.room.entities.ImageEntity
+import com.example.android.catsapp.datalayer.catsbreeedsfeature.remotedatasource.datamodels.getimages.Images
+import com.example.android.catsapp.datalayer.catsbreeedsfeature.remotedatasource.datamodels.getimages.ImagesItem
 
 data class FullBreedInfo(
     val id: String,
@@ -83,5 +85,34 @@ data class FullBreedInfo(
             )
         }
 
+        fun fromImageItem(item: Images, selected: Boolean): FullBreedInfo = with(item) {
+            val breed = first().breeds.first()
+            val imagesUrl = map { it.url }
+
+            with(breed) {
+                FullBreedInfo(
+                    id = id,
+                    isSelected = selected,
+                    name,
+                    temperament,
+                    description,
+                    wikipedia_url,
+                    affection_level,
+                    adaptability,
+                    child_friendly,
+                    dog_friendly,
+                    energy_level,
+                    grooming,
+                    health_issues,
+                    intelligence,
+                    shedding_level,
+                    social_needs,
+                    stranger_friendly,
+                    vocalisation,
+                    imagesUrl.first(),
+                    imagesUrl
+                )
+            }
+        }
     }
 }

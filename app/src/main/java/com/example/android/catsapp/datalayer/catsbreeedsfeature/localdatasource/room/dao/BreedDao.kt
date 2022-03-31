@@ -15,6 +15,9 @@ interface BreedDao {
     @Insert
     fun insertBreed(breed: BreedEntity)
 
-    @Delete
-    fun delete(breed: BreedEntity)
+    @Query("DELETE FROM Breed WHERE breedId = :breedId")
+    fun deleteById(breedId: String)
+
+    @Query("SELECT EXISTS(SELECT * FROM Breed WHERE breedId = :breedId)")
+    fun isPresent(breedId: String): Boolean
 }

@@ -22,14 +22,18 @@ class RoomLocalDataSource(
 
     }
 
-    override suspend fun removeBreedFromDb(breedDetails: FullBreedInfo) {
+    override suspend fun removeBreedFromDb(breedId: String) {
         withContext(dispatcher) {
-            database.breedDao().delete(FullBreedInfo.mapToBreedEntity(breedDetails))
+            database.breedDao().deleteById(breedId)
         }
     }
 
     override suspend fun getAllBreedsFromDb(): List<FullBreedInfo> = withContext(dispatcher) {
         database.breedDao().getAllBreeds().map { FullBreedInfo.fromBreedEntity(it) }
+    }
+
+    override suspend fun isPresent(breedId: String): Boolean = withContext(dispatcher) {
+        database.breedDao().isPresent(breedId)
     }
 
 }
