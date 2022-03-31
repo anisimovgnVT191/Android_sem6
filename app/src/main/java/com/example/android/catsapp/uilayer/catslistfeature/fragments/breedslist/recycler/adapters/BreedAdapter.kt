@@ -1,7 +1,6 @@
 package com.example.android.catsapp.uilayer.catslistfeature.fragments.breedslist.recycler.adapters
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.recyclerview.widget.RecyclerView
@@ -9,13 +8,10 @@ import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
 import com.example.android.catsapp.R
 import com.example.android.catsapp.databinding.BreedItemLayoutBinding
-import com.example.android.catsapp.datalayer.catsbreeedsfeature.datamodels.getimages.Breed
 import com.example.android.catsapp.uilayer.catslistfeature.delegateadapter.ClickableViewHolder
 import com.example.android.catsapp.uilayer.catslistfeature.delegateadapter.DelegateAdapter
 import com.example.android.catsapp.uilayer.catslistfeature.delegateadapter.DelegateAdapterItem
 import com.example.android.catsapp.uilayer.catslistfeature.fragments.breedslist.recycler.models.BreedItem
-import com.google.android.material.card.MaterialCardView
-import com.google.android.material.textview.MaterialTextView
 
 class BreedAdapter(
     private val listener: (BreedItem) -> Unit

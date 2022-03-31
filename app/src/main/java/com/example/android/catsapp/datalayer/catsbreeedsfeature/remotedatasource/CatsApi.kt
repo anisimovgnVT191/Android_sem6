@@ -1,7 +1,7 @@
-package com.example.android.catsapp.datalayer.catsbreeedsfeature
+package com.example.android.catsapp.datalayer.catsbreeedsfeature.remotedatasource
 
-import com.example.android.catsapp.datalayer.catsbreeedsfeature.datamodels.getbreeds.Breeds
-import com.example.android.catsapp.datalayer.catsbreeedsfeature.datamodels.getimages.Images
+import com.example.android.catsapp.datalayer.catsbreeedsfeature.remotedatasource.datamodels.getbreeds.Breeds
+import com.example.android.catsapp.datalayer.catsbreeedsfeature.remotedatasource.datamodels.getimages.Images
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query

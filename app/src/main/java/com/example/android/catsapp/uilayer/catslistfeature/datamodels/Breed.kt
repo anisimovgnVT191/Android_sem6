@@ -1,7 +1,7 @@
 package com.example.android.catsapp.uilayer.catslistfeature.datamodels
 
 import android.util.Log
-import com.example.android.catsapp.datalayer.catsbreeedsfeature.datamodels.getbreeds.BreedsItem
+import com.example.android.catsapp.datalayer.catsbreeedsfeature.remotedatasource.datamodels.getbreeds.BreedsItem
 
 data class Breed(
     val breedId: String,

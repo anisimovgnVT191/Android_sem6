@@ -1,4 +1,4 @@
-package com.example.android.catsapp.datalayer.catsbreeedsfeature.datamodels.getimages
+package com.example.android.catsapp.datalayer.catsbreeedsfeature.remotedatasource.datamodels.getimages
 
 data class Breed(
     val adaptability: Int,

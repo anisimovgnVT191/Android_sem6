@@ -27,6 +27,7 @@ ext {
     converterGsonVersion = '2.9.0'
     fragmentKtxVersion = '1.4.1'
     navigationComponentVersion = '2.4.1'
+    roomVersion = '2.4.2'
 }
 task clean(type: Delete) {
     delete rootProject.buildDir

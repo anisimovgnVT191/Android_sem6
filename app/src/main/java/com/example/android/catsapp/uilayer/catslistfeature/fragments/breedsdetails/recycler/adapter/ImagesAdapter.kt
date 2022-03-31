@@ -3,7 +3,6 @@ package com.example.android.catsapp.uilayer.catslistfeature.fragments.breedsdeta
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android.catsapp.R
 import com.example.android.catsapp.uilayer.catslistfeature.delegateadapter.CompositeAdapter

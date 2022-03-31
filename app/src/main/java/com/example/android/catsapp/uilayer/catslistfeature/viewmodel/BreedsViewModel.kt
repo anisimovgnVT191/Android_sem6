@@ -6,8 +6,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.android.catsapp.datalayer.catsbreeedsfeature.CatsRepository
-import com.example.android.catsapp.datalayer.catsbreeedsfeature.datamodels.getbreeds.BreedsItem
-import com.example.android.catsapp.datalayer.catsbreeedsfeature.datamodels.getimages.ImagesItem
+import com.example.android.catsapp.datalayer.catsbreeedsfeature.remotedatasource.datamodels.getbreeds.BreedsItem
+import com.example.android.catsapp.datalayer.catsbreeedsfeature.remotedatasource.datamodels.getimages.ImagesItem
 import com.example.android.catsapp.domainlayer.Either
 import com.example.android.catsapp.domainlayer.NoInternetConnectionException
 import com.example.android.catsapp.domainlayer.SearchReturnedZeroItemsException
@@ -137,7 +137,7 @@ class BreedsViewModel(
         return listOf(imagesItem, descriptionItem) + characteristicsList + listOf(wikiItem)
     }
 
-    private fun Array<Characteristics>.mapByBreed(breed: com.example.android.catsapp.datalayer.catsbreeedsfeature.datamodels.getimages.Breed) =
+    private fun Array<Characteristics>.mapByBreed(breed: com.example.android.catsapp.datalayer.catsbreeedsfeature.remotedatasource.datamodels.getimages.Breed) =
         this.map {
             when(it) {
                 Characteristics.AffectionLevel -> CharacteristicItem(it,breed.affection_level)

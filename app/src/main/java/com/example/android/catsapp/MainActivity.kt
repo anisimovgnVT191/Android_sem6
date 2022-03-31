@@ -9,13 +9,13 @@ import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.HasDefaultViewModelProviderFactory
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.android.catsapp.databinding.ActivityMainBinding
-import com.example.android.catsapp.datalayer.catsbreeedsfeature.CatsApi
+import com.example.android.catsapp.datalayer.catsbreeedsfeature.remotedatasource.CatsApi
 import com.example.android.catsapp.datalayer.catsbreeedsfeature.CatsRepository
-import com.example.android.catsapp.datalayer.catsbreeedsfeature.CatsRetrofitSource
+import com.example.android.catsapp.datalayer.catsbreeedsfeature.localdatasource.room.RoomLocalDataSource
+import com.example.android.catsapp.datalayer.catsbreeedsfeature.remotedatasource.CatsRetrofitSource
 import com.example.android.catsapp.datalayer.retrofitbuilder.ServiceBuilder
 import com.example.android.catsapp.uilayer.catslistfeature.viewmodel.BreedsDetailsViewModelFactory
 import kotlinx.coroutines.Dispatchers
@@ -37,10 +37,13 @@ class MainActivity : AppCompatActivity(), HasDefaultViewModelProviderFactory {
     override fun getDefaultViewModelProviderFactory(): ViewModelProvider.Factory {
         return BreedsDetailsViewModelFactory(
             CatsRepository(
-                CatsRetrofitSource(
+                remoteSource = CatsRetrofitSource(
                     ServiceBuilder.buildService(
                         CatsApi::class.java
                     ), Dispatchers.IO
+                ),
+                localSource = RoomLocalDataSource(
+                    applicationContext, Dispatchers.IO
                 )
             )
         )
